@@ -1,6 +1,7 @@
 package ru.gb.springdemo.api;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.LimitBookException;
@@ -34,8 +35,7 @@ public class IssuerController {
     } catch (NoSuchElementException e) {
       return ResponseEntity.notFound().build();
     } catch (LimitBookException e){
-      return  ResponseEntity.badRequest().build(); // не хочет 409 выдавать
-//    return ResponseEntity.status(HttpStatus.CONFLICT).body(issue);
+      return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     return ResponseEntity.ok().build();
