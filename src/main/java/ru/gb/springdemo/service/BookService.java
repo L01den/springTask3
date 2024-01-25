@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.repository.BookRepository;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by Lorden on 18.01.2024
  */
@@ -20,16 +22,16 @@ public class BookService {
 
 
     public Book getBookById(long id) {
-        return bookRepository.getBookById(id);
+        return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
 
     public void deleteBookById(long id) {
-        bookRepository.deleteBookById(id);
+        bookRepository.deleteById(id);
     }
 
     public Book createBook(String title) {
         Book book = new Book(title);
-        bookRepository.addBook(book);
+        bookRepository.save(book);
         return book;
 
     }

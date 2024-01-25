@@ -1,6 +1,8 @@
 package ru.gb.springdemo.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -8,27 +10,30 @@ import java.time.LocalDateTime;
  * Запись о факте выдачи книги (в БД)
  */
 @Data
-// @Entity
+@Entity
+@NoArgsConstructor
+@Table(name = "issue")
 public class Issue {
 
-  public static long sequence = 1L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private long id;
 
-  private final long id;
-  private final long bookId;
-  private final long readerId;
+  @Column(name = "book_id", nullable = false)
+  private long bookId;
+  @Column(name = "reader_id", nullable = false)
+  private long readerId;
+  @Column(name = "issued_id", nullable = false)
+  private LocalDateTime issuedAt;
+  @Column(name = "returned_id")
+  private  LocalDateTime  returnedAt;
 
-  /**
-   * Дата выдачи
-   */
-  private final LocalDateTime issued_at;
-  private  LocalDateTime  returned_at;
 
-
-  public Issue(long bookId, long readerId) {
-    this.id = sequence++;
+  public Issue(long bookId, long readerId, LocalDateTime issuedAt) {
     this.bookId = bookId;
     this.readerId = readerId;
-    this.issued_at = LocalDateTime.now();
+    this.issuedAt = issuedAt;
   }
 
 

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.repository.ReaderRepository;
 
+import java.util.Optional;
+
 /**
  * Created by Lorden on 18.01.2024
  */
@@ -17,16 +19,17 @@ public class ReaderService {
 
     public Reader createReader(String name) {
         Reader reader = new Reader(name);
-        readerRepository.addReader(reader);
+        readerRepository.save(reader);
         return reader;
     }
 
     public void deleteReaderById(long id) {
-        readerRepository.deleteReaderById(id);
+        readerRepository.deleteById(id);
 
     }
 
     public Reader getReaderById(long id) {
-        return readerRepository.getReaderById(id);
+        Reader reader = readerRepository.findById(id).get();
+        return reader;
     }
 }

@@ -2,18 +2,15 @@ package ru.gb.springdemo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.NestedCheckedException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.LimitBookException;
 import ru.gb.springdemo.model.IssueRequest;
 import ru.gb.springdemo.model.Issue;
-import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -30,10 +27,10 @@ public class IssuerService {
   private final IssueRepository issueRepository;
 
   public Issue issue(IssueRequest request) throws LimitBookException {
-    if (bookRepository.getBookById(request.getBookId()) == null) {
+    if (bookRepository.findById(request.getBookId()) == null) {
       throw new NoSuchElementException("Не найдена книга с идентификатором \"" + request.getBookId() + "\"");
     }
-    if (readerRepository.getReaderById(request.getReaderId()) == null) {
+    if (readerRepository.findById(request.getReaderId()) == null) {
       throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
     }
     if(myProperty <= checkCountBook(request.getReaderId())){
@@ -41,28 +38,32 @@ public class IssuerService {
     }
     // можно проверить, что у читателя нет книг на руках (или его лимит не превышает в Х книг)
 
-    Issue issue = new Issue(request.getBookId(), request.getReaderId());
+    Issue issue = new Issue(request.getBookId(), request.getReaderId(), LocalDateTime.now());
     issueRepository.save(issue);
     return issue;
   }
 
   private long checkCountBook(long readerId){
-    List<Issue> issues = issueRepository.getIssues();
+    List<Issue> issues = issueRepository.findAll();
     return issues.stream().
-            filter(it -> Objects.equals(it.getReaderId(), readerId) && it.getReturned_at() == null).
+            filter(it -> Objects.equals(it.getReaderId(), readerId) && it.getReturnedAt() == null).
             count();
 
   }
 
   public Issue getIssueById(long id) {
-    return issueRepository.getIssueById(id);
+    Issue issue = issueRepository.findById(id).get();
+    return issue;
   }
 
   public List<Issue> getIssuesByReader(long id) {
-    return issueRepository.getIssuesByReader(id);
+    return issueRepository.findByReaderId(id);
   }
 
   public Issue returnBook(long id) {
-    return issueRepository.returnBook(id);
+    Issue issue = issueRepository.findById(id).get();
+    issue.setReturnedAt(LocalDateTime.now());
+    issueRepository.save(issue);
+    return issue;
   }
 }

@@ -1,19 +1,24 @@
 package ru.gb.springdemo.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Entity(name = "reader")
 public class Reader {
 
-  public static long sequence = 1L;
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-  private final long id;
-  private final String name;
+  @Column(name = "name")
+  private String name;
 
   public Reader(String name) {
-    this(sequence++, name);
+    this.name = name;
   }
-
 }

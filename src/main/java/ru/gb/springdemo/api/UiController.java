@@ -28,13 +28,13 @@ public class UiController {
 
     @GetMapping("/books")
     public String getBooks(Model model) {
-        model.addAttribute("books", uiService.getBooks());
+        model.addAttribute("books", uiService.findBookAll());
         return "uiBooks";
     }
 
     @GetMapping("/readers")
     public String getReader(Model model) {
-        model.addAttribute("readers", uiService.getReaders());
+        model.addAttribute("readers", uiService.findReaderAll());
         return "uiReader";
     }
 
