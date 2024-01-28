@@ -1,5 +1,6 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.Reader;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reader")
+@Tag(name = "Reader")
 public class ReaderController {
     private final IssuerService issuerService;
     private final ReaderService readerService;
