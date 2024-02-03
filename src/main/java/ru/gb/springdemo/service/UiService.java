@@ -1,13 +1,11 @@
 package ru.gb.springdemo.service;
 
 import org.springframework.stereotype.Service;
-import ru.gb.springdemo.model.Book;
-import ru.gb.springdemo.model.Issue;
-import ru.gb.springdemo.model.IssueFormat;
-import ru.gb.springdemo.model.Reader;
+import ru.gb.springdemo.model.*;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
+import ru.gb.springdemo.repository.ReaderRepositoryV2;
 
 import java.util.ArrayList;
 import java.util.List;

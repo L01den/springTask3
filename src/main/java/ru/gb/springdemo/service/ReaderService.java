@@ -2,9 +2,9 @@ package ru.gb.springdemo.service;
 
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Reader;
+import ru.gb.springdemo.model.ReaderV2;
 import ru.gb.springdemo.repository.ReaderRepository;
-
-import java.util.Optional;
+import ru.gb.springdemo.repository.ReaderRepositoryV2;
 
 /**
  * Created by Lorden on 18.01.2024

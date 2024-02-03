@@ -8,20 +8,20 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "reader")
+@Entity(name = "reader_v2")
 @Schema(name = "Читатель")
 public class Reader {
-
   @Id
-  @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Schema(name = "Идентификатор")
   private long id;
-
   @Column(name = "name")
-  @Schema(name = "Имя")
   private String name;
 
+  @Column(name = "login")
+  private String login;
+
+  @Column(name = "password")
+  private String password;
   public Reader(String name) {
     this.name = name;
   }

@@ -1,19 +1,24 @@
 package ru.gb.springdemo.hw;
 
 
-import ru.gb.springdemo.repository.BookRepository;
-import ru.gb.springdemo.repository.IssueRepository;
-import ru.gb.springdemo.repository.ReaderRepository;
-import ru.gb.springdemo.service.UiService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+import ru.gb.springdemo.model.ReaderV2;
 
+
+@Component
 public class Homework {
 
 
     /**
-     * Домашнее задание 6:
-     * 1. Подключить OpenAPI 3 и swagger к проекту с библиоткой
-     * 2. Описать все контроллеры, эндпоинты и возвращаемые тела с помощью аннотаций OpenAPI 3
-     * 3. В качестве результата, необходимо прислать скриншот(ы) страницы swagger (с ручками)
+     * Домашнее задание 7:
+     * 1. Для ресурсов, возвращающих HTML-страницы, реализовать авторизацию через login-форму.
+     * Остальные /api ресурсы, возвращающие JSON, закрывать не нужно!
+     * 2.1* Реализовать таблицы User(id, name, password) и Role(id, name), связанные многие ко многим
+     * 2.2* Реализовать UserDetailsService, который предоставляет данные из БД (таблицы User и Role)
+     * 3.3* Ресурсы выдачей (issue) доступны обладателям роли admin
+     * 3.4* Ресурсы читателей (reader) доступны всем обладателям роли reader
+     * 3.5* Ресурсы книг (books) доступны всем авторизованным пользователям
      *
      */
 

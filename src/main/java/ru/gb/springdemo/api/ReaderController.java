@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.Reader;
-import ru.gb.springdemo.repository.IssueRepository;
-import ru.gb.springdemo.repository.ReaderRepository;
 import ru.gb.springdemo.service.IssuerService;
 import ru.gb.springdemo.service.ReaderService;
 
