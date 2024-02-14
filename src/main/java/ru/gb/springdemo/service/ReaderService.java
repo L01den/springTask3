@@ -2,9 +2,10 @@ package ru.gb.springdemo.service;
 
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Reader;
-import ru.gb.springdemo.model.ReaderV2;
 import ru.gb.springdemo.repository.ReaderRepository;
-import ru.gb.springdemo.repository.ReaderRepositoryV2;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Lorden on 18.01.2024
@@ -31,5 +32,18 @@ public class ReaderService {
     public Reader getReaderById(long id) {
         Reader reader = readerRepository.findById(id).get();
         return reader;
+    }
+
+    public Reader save(Reader reader){
+        return readerRepository.save(reader);
+    }
+
+    public List<Reader> getAll() {
+        return readerRepository.findAll().stream()
+                .collect(Collectors.toList());
+    }
+
+    public  void deleteAll(){
+        readerRepository.deleteAll();
     }
 }

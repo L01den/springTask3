@@ -5,7 +5,6 @@ import ru.gb.springdemo.model.*;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
-import ru.gb.springdemo.repository.ReaderRepositoryV2;
 
 import java.util.ArrayList;
 import java.util.List;

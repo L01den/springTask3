@@ -9,7 +9,7 @@ import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
-import ru.gb.springdemo.repository.ReaderRepositoryV2;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -66,5 +66,9 @@ public class IssuerService {
     issue.setReturnedAt(LocalDateTime.now());
     issueRepository.save(issue);
     return issue;
+  }
+
+  public void deleteAll(){
+    issueRepository.deleteAll();
   }
 }

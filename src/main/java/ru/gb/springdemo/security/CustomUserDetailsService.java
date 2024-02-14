@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.gb.springdemo.model.Reader;
-import ru.gb.springdemo.model.ReaderV2;
 import ru.gb.springdemo.repository.ReaderRepository;
-import ru.gb.springdemo.repository.ReaderRepositoryV2;
 
 import java.util.ArrayList;
 import java.util.List;

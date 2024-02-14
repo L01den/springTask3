@@ -16,9 +16,9 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return  httpSecurity
                 .authorizeHttpRequests(regestry -> regestry
-                        .requestMatchers("/book/**").authenticated()
-                        .requestMatchers("/reader/**").hasAnyAuthority("reader")
-                        .requestMatchers("/issue/**").hasAnyAuthority("admin")
+//                        .requestMatchers("/book/**").authenticated()
+//                        .requestMatchers("/reader/**").hasAnyAuthority("reader")
+//                        .requestMatchers("/issue/**").hasAnyAuthority("admin")
                         .anyRequest().permitAll()
                 )
                 .formLogin(Customizer.withDefaults())

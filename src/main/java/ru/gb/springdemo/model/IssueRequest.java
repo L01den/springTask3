@@ -18,4 +18,8 @@ public class IssueRequest {
    */
   private long bookId;
 
+  public IssueRequest(long reader, long book) {
+    readerId = reader;
+    bookId = book;
+  }
 }

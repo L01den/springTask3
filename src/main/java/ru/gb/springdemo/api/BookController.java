@@ -2,10 +2,14 @@ package ru.gb.springdemo.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Book;
-import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.service.BookService;
+
+
+import java.util.List;
 
 /**
  * Created by Lorden on 18.01.2024
@@ -25,6 +29,10 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
+    @GetMapping
+    public List<Book> getAll(){
+        return bookService.getAll();
+    }
 
     @GetMapping( "/{id}")
     @Operation(summary = "Получение книги по id")
@@ -38,9 +46,29 @@ public class BookController {
         bookService.deleteBookById(id);
     }
 
+//    @DeleteMapping("/{id}")
+//    @Operation(summary = "Удалить книгу", description = "Удаляет книгу, которую находит по указанному ID, и отдаёт её в ответе")
+//    public ResponseEntity<Book> delByID(@PathVariable long id) {
+//        bookService.deleteBookById(id);
+//        return ResponseEntity.badRequest().build();
+//    }
+
+//    @PostMapping
+//    @Operation(summary = "Создание книги")
+//    public Book createBook(@RequestBody String title){
+//        return bookService.createBook(title);
+//    }
+
     @PostMapping
     @Operation(summary = "Создание книги")
-    public Book createBook(@RequestBody String title){
-        return bookService.createBook(title);
+    public ResponseEntity<Book> aadBook(@RequestBody Book book){
+        System.out.println(bookService.save(book));
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.save(book));
     }
+
+//    @PostMapping
+//    @Operation(summary = "Добавить книгу", description = "Добавляет книгу, переданную в теле запроса, и отдаёт её в ответе")
+//    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+//        return ResponseEntity.status(HttpStatus.OK).body(bookService.save(book));
+//    }
 }
